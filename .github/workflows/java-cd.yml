@@ -1,0 +1,40 @@
+name: Java CD
+
+on:
+  push:
+    branches: [ main ]
+  workflow_run:
+    workflows: ["Java CI"]
+    types:
+      - completed
+
+jobs:
+  package:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v4
+
+    - name: Configura o Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Compila o projeto
+      run: |
+        mkdir -p bin
+        javac -d bin $(find src -name "*.java")
+
+    - name: Cria o arquivo JAR
+      run: |
+        mkdir -p dist
+        jar --create --file=dist/biblioteca-virtual.jar -C bin .
+
+    - name: Faz upload do artefato (JAR)
+      uses: actions/upload-artifact@v4
+      with:
+        name: biblioteca-virtual
+        path: dist/biblioteca-virtual.jar
