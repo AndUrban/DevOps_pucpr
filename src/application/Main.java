@@ -57,6 +57,8 @@ public class Main {
 		} while (opcao != 0);
 
 		sc.close();
+		
+		System.out.println("Rodando CI e CD completos!");
 
 	}
 
