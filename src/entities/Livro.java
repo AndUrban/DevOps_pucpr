@@ -22,4 +22,27 @@ public class Livro {
 	public boolean isEmprestado() {
 		return emprestado;
 	}
+
+	public void emprestar() {
+		if (!emprestado) {
+			emprestado = true;
+			System.out.println("Livro emprestado com sucesso.");
+		} else {
+			System.out.println("Livro já está emprestado.");
+		}
+	}
+
+	public void devolver() {
+		if (emprestado) {
+			emprestado = false;
+			System.out.println("Livro devolvido com sucesso.");
+		} else {
+			System.out.println("Livro não está emprestado.");
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "\"" + titulo + "\" por " + autor + (emprestado ? " (Emprestado)" : " (Disponível)");
+	}
 }
