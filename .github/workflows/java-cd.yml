@@ -48,8 +48,8 @@ jobs:
       run: echo "Deploy realizado com sucesso (simulado)"
 
   dockerize:
-  runs-on: ubuntu-latest
-  needs: build
+    runs-on: ubuntu-latest
+    needs: build
 
   steps:
   - name: Checkout do código
