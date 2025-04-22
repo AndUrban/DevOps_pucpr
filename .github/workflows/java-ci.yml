@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +21,17 @@ jobs:
         java-version: '17'
 
     - name: Compila os arquivos Java
-      run: javac -d bin $(find src -name "*.java")
+      run: |
+        mkdir -p bin
+        javac -d bin $(find src -name "*.java")
 
-    - name: Confirma que a compilação foi bem-sucedida
-      run: echo "Código Java compilado com sucesso ✅"
+    - name: Cria o arquivo JAR
+      run: |
+        mkdir -p dist
+        jar --create --file=dist/biblioteca-virtual.jar -C bin .
+
+    - name: Faz upload do artefato (JAR)
+      uses: actions/upload-artifact@v4
+      with:
+        name: biblioteca-virtual
+        path: dist/biblioteca-virtual.jar
