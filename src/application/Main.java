@@ -58,7 +58,7 @@ public class Main {
 
 		sc.close();
 		
-		System.out.println("Rodando CI e CD completos!");
+		System.out.println("TESTE DISCORD-WEBHOOK CI");
 
 	}
 
