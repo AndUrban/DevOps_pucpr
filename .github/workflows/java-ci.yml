@@ -20,7 +20,10 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Compila os arquivos Java
+    - name: Rodar testes com Maven
+      run: mvn clean test
+
+    - name: Compila os arquivos Java (manual, como já fazia)
       run: |
         mkdir -p bin
         javac -d bin $(find src -name "*.java")
@@ -29,7 +32,7 @@ jobs:
       run: |
         mkdir -p dist
         jar --create --file=dist/biblioteca-virtual.jar -C bin .
-    
+
     - name: Faz upload do artefato (JAR)
       uses: actions/upload-artifact@v4
       with:
